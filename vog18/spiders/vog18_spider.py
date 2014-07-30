@@ -1,3 +1,4 @@
+import urllib
 from scrapy.contrib.spiders.crawl import CrawlSpider
 from scrapy.selector import Selector
 
@@ -13,7 +14,8 @@ class VOG18_Spider(CrawlSpider):
         hxs = Selector(response)
         self.save_page(response.body)
         for x in range(1, 6):
-            print(hxs.xpath(xpath.format(x) + '/@data-src_big').extract())
+            url = hxs.xpath(xpath.format(x) + '/@data-src_big').extract()[0].split('|')[0]
+            urllib.urlretrieve(url, 'photo{0}.jpg'.format(x))
 
     def save_page(self, content):
         with open(self.filename, 'wb') as f:
