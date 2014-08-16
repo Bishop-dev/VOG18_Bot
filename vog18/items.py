@@ -2,5 +2,8 @@ from scrapy.item import Item, Field
 
 
 class Vog18Item(Item):
-    link = Field()
-    photo_name = Field()
+    photos_links = Field()
+    photo_names = Field()
+    post_link = Field()
+    description = Field()
+    data_chunk_id = Field()
